@@ -28,7 +28,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 #include <dynamic_reconfigure/server.h>
 
-#include <ftc_local_planner/FTCPlannerConfig.h>
+#include <asr_ftc_local_planner/FTCPlannerConfig.h>
 
 #include <nav_core/base_local_planner.h>
 
