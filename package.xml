@@ -3,7 +3,7 @@
     <version>1.0.0</version>
     <description>A local planner which based on the "follow the carrot" algoithm. Drives accurate along the global plan</description>
     <author>Marek Felix</author>
-    <maintainer email="pascal.meissner@posteo.de">Meißner Pascal</maintainer>
+    <maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
     <license>BSD</license>
 
     <buildtool_depend>catkin</buildtool_depend>
