@@ -240,6 +240,11 @@ namespace ftc_local_planner
 
     bool FTCPlanner::rotateToOrientation(double angle, geometry_msgs::Twist& cmd_vel, double accuracy)
     {
+
+        if((cmd_vel_linear_x_  - 0.1)  >= 0){
+            cmd_vel.linear.x = cmd_vel_linear_x_ - 0.1;
+            cmd_vel_linear_x_ = cmd_vel_linear_x_ - 0.1;
+        }
         if(fabs(angle) > accuracy)
         {
             //Slow down
@@ -421,7 +426,7 @@ namespace ftc_local_planner
         //Push velocity to cmd_vel for driving.
         cmd_vel.linear.x = cmd_vel_linear_x_;
         cmd_vel.angular.z = cmd_vel_angular_z_;
-
+        cmd_vel_angular_z_rotate_ = cmd_vel_angular_z_;
         ROS_DEBUG("FTCPlanner: max_point: %d, distance: %f, x_vel: %f, rot_vel: %f, angle: %f", max_point, distance, cmd_vel.linear.x, cmd_vel.angular.z, angle);
 
         return max_point;
