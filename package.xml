@@ -5,8 +5,7 @@
     <author>Marek Felix</author>
     <maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
     <license>BSD</license>
-    
-  
+    <url type="website">http://wiki.ros.org/asr_ftc_local_planner</url>
 
     <buildtool_depend>catkin</buildtool_depend>
     <build_depend>cmake_modules</build_depend>
