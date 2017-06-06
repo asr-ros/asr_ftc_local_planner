@@ -6,7 +6,7 @@
     <maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
     <license>BSD</license>
     
-    <exec_depend>asr_navfn</exec_depend>
+  
 
     <buildtool_depend>catkin</buildtool_depend>
     <build_depend>cmake_modules</build_depend>
