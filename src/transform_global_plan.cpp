@@ -28,7 +28,7 @@ namespace ftc_local_planner
             ROS_ERROR("Received plan with zero length");
             return false;
         }
-        if(plan_point >= global_plan.size())
+        if(plan_point >= (int)global_plan.size())
         {
             ROS_ERROR("Goal_functions: Plan_point %d to big. Plan size: %lu",plan_point, global_plan.size());
             return false;

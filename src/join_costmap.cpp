@@ -36,13 +36,13 @@ namespace ftc_local_planner
         }
         //Init vector global to right size
         global.resize(global_costmap_ros_->getCostmap()->getSizeInCellsX());
-        for (int i = 0; i < global_costmap_ros_->getCostmap()->getSizeInCellsX(); ++i){
+        for (unsigned int i = 0; i < global_costmap_ros_->getCostmap()->getSizeInCellsX(); ++i){
            global[i].resize(global_costmap_ros_->getCostmap()->getSizeInCellsY());
         }
 
         //Push global costmap in global vector
-        for(int i = 0; i < global_costmap_ros_->getCostmap()->getSizeInCellsX(); i++){
-            for(int j = 0; j < global_costmap_ros_->getCostmap()->getSizeInCellsY(); j++){
+        for(unsigned int i = 0; i < global_costmap_ros_->getCostmap()->getSizeInCellsX(); i++){
+            for(unsigned int j = 0; j < global_costmap_ros_->getCostmap()->getSizeInCellsY(); j++){
                 global[i][j] = global_costmap_ros_->getCostmap()->getCost(i,j);
             }
         }
@@ -54,8 +54,8 @@ namespace ftc_local_planner
         if(!init){
             ROS_WARN("JoinCostmap: Dont join costmap, because init faild.");
         }else{
-            for(int i = 0; i < global_costmap_ros_->getCostmap()->getSizeInCellsX(); i++){
-                for(int j = 0; j < global_costmap_ros_->getCostmap()->getSizeInCellsY(); j++){
+            for(unsigned int i = 0; i < global_costmap_ros_->getCostmap()->getSizeInCellsX(); i++){
+                for(unsigned int j = 0; j < global_costmap_ros_->getCostmap()->getSizeInCellsY(); j++){
                     double wx = 0;
                     double wy = 0;
                     global_costmap_ros_->getCostmap()->mapToWorld(i,j, wx, wy);

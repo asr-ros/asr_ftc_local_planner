@@ -175,7 +175,7 @@ namespace ftc_local_planner
         int max_point = 0;
         tf::Stamped<tf::Pose> x_pose;
 
-        for ( int i = 0; i < global_plan_.size(); i++)
+        for (unsigned int i = 0; i < global_plan_.size(); i++)
         {
             ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),x_pose,i);
             double distance = sqrt(pow((x_pose.getOrigin().getX()-current_pose.getOrigin().getX()),2)+pow((x_pose.getOrigin().getY()-current_pose.getOrigin().getY()),2));
@@ -214,7 +214,7 @@ namespace ftc_local_planner
 
     double FTCPlanner::calculateGlobalPlanAngle(tf::Stamped<tf::Pose> current_pose, const std::vector<geometry_msgs::PoseStamped>& plan, int point)
     {
-        if(point >= plan.size())
+        if(point >= (int)plan.size())
         {
             point = plan.size()-1;
         }
@@ -321,7 +321,6 @@ namespace ftc_local_planner
 
     int FTCPlanner::driveToward(tf::Stamped<tf::Pose> current_pose, geometry_msgs::Twist& cmd_vel)
     {
-        double new_sim_time = 0;
         double distance = 0;
         double angle = 0;
         int max_point = 0;
