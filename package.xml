@@ -1,7 +1,7 @@
 <package>
     <name>asr_ftc_local_planner</name>
     <version>1.0.0</version>
-    <description>A local planner which based on the "follow the carrot" algoithm. Drives accurate along the global plan</description>
+    <description>A local planner which based on the "follow the carrot" algorithm. Drives accurate along the global plan</description>
     <author>Marek Felix</author>
     <maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
     <license>BSD</license>
