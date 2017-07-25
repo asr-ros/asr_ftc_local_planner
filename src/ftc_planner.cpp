@@ -174,7 +174,8 @@ namespace ftc_local_planner
         publishPlan(max_point);
 
         ros::Time end = ros::Time::now();
-        ROS_DEBUG("FTCPlanner: Calculation time: %f", end.toSec()-begin.toSec());
+        ros::Duration duration = end - begin;
+        ROS_DEBUG("FTCPlanner: Calculation time: %f seconds", duration.toSec());
         return true;
     }
 
