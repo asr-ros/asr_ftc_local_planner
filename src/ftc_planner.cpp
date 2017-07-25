@@ -72,8 +72,10 @@ namespace ftc_local_planner
         bool first_use = false;
         if(first_setPlan_)
         {
-            //init joincostmap with local an global costmap.
-            joinCostmap_->initialize(costmap_ros_, global_costmap_ros_);
+            if(config_.join_obstacle){
+                //init joincostmap with local an global costmap.
+                joinCostmap_->initialize(costmap_ros_, global_costmap_ros_);
+            }
 
             first_setPlan_ = false;
             ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),old_goal_pose_,global_plan_.size()-1);
@@ -104,6 +106,9 @@ namespace ftc_local_planner
 
     bool FTCPlanner::computeVelocityCommands(geometry_msgs::Twist& cmd_vel)
     {
+
+        ros::Time begin = ros::Time::now();
+
         tf::Stamped<tf::Pose> current_pose;
         costmap_ros_->getRobotPose(current_pose);
 
@@ -167,6 +172,9 @@ namespace ftc_local_planner
         }
 
         publishPlan(max_point);
+
+        ros::Time end = ros::Time::now();
+        ROS_DEBUG("FTCPlanner: Calculation time: %f", end.toSec()-begin.toSec());
         return true;
     }
 
