@@ -1,0 +1,50 @@
+# General
+.directory
+.deps
+.libs
+*.pyc
+*.pcd
+*.cfgc
+*.autosave
+*~
+*.svn
+*.swp
+*__init__.py
+*.o
+*.la
+*.lo
+*.kdev[0-9]
+msg_gen/
+srv_gen/
+cfg/cpp/
+
+# Build directories
+build/
+_build*
+
+# Visual Studio
+*.opensdf
+*.sdf
+*.suo
+
+# KDevelop
+*.kate-swp
+*.kdev4
+
+# Qt Creator
+*.creator*
+*.files
+*.includes
+*.user
+qtcreator-*
+
+# Eclipse
+.project
+.cproject
+
+# Emacs
+.#*
+
+# Ignore generated docs
+docs/
+*.wikidoc

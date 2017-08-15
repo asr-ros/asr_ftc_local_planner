@@ -140,9 +140,13 @@ namespace ftc_local_planner
         costmap_2d::Costmap2DROS* costmap_ros_;
         //global plan which we run along
         std::vector<geometry_msgs::PoseStamped> global_plan_;
+        //transformed global plan in global frame with only the points with are needed for calculation (max_points)
+        std::vector<geometry_msgs::PoseStamped> transformed_global_plan_;
         //check if plan first at first time
         bool first_setPlan_;
-        //used for checking if new global pose is set
+        //last point of the global plan in global frame
+        tf::Stamped<tf::Pose> goal_pose_;
+        // true if the robot should rotate to gobal plan if new global goal set
         tf::Stamped<tf::Pose> old_goal_pose_;
         // true if the robot should rotate to gobal plan if new global goal set
         bool rotate_to_global_plan_;

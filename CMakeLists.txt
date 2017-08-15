@@ -14,15 +14,15 @@ find_package(catkin REQUIRED
             tf
         )
 
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(PCL REQUIRED)
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
-    ${EIGEN_INCLUDE_DIRS}
+    ${Eigen3_INCLUDE_DIRS}
     ${PCL_INCLUDE_DIRS}
     )
-add_definitions(${EIGEN_DEFINITIONS})
+add_definitions(${Eigen3_DEFINITIONS})
 
 link_directories(${catkin_LIBRARY_DIRS})
 
@@ -33,22 +33,22 @@ generate_dynamic_reconfigure_options(
 
 catkin_package(
     INCLUDE_DIRS include
-    LIBRARIES ftc_local_planner
+    LIBRARIES asr_ftc_local_planner
     CATKIN_DEPENDS
         dynamic_reconfigure
         pluginlib
         roscpp
 )
 
-add_library(ftc_local_planner 
+add_library(asr_ftc_local_planner 
 	    src/ftc_planner.cpp
 	    src/transform_global_plan.cpp
 	    src/join_costmap.cpp)
-target_link_libraries(ftc_local_planner ${catkin_LIBRARIES})
-add_dependencies(ftc_local_planner ftc_local_planner_gencfg)
-add_dependencies(ftc_local_planner nav_msgs_gencpp)
+target_link_libraries(asr_ftc_local_planner ${catkin_LIBRARIES})
+add_dependencies(asr_ftc_local_planner asr_ftc_local_planner_gencfg)
+add_dependencies(asr_ftc_local_planner nav_msgs_gencpp)
 
-install(TARGETS ftc_local_planner
+install(TARGETS asr_ftc_local_planner
        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
        )
