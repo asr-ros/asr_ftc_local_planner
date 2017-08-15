@@ -236,7 +236,6 @@ namespace ftc_local_planner
         for(int i = 0; i <= point; i++)
         {
             geometry_msgs::PoseStamped x_pose;
-            //ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),x_pose,point);
             x_pose=transformed_global_plan_.at(point);
 
             //Calculate the angles between robotpose and global plan point pose
@@ -346,8 +345,6 @@ namespace ftc_local_planner
         double cmd_vel_linear_x_old = cmd_vel_linear_x_;
         double cmd_vel_angular_z_old = cmd_vel_angular_z_;
 
-       // tf::Stamped<tf::Pose> x_pose;
-       // ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),x_pose,max_point);
         geometry_msgs::PoseStamped x_pose;
         x_pose = transformed_global_plan_.at(max_point);
 
@@ -459,8 +456,6 @@ namespace ftc_local_planner
 
         for (int i = 0; i <= max_points; i++)
         {
-            //tf::Stamped<tf::Pose> x_pose;
-            //ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),x_pose,i);
             geometry_msgs::PoseStamped x_pose;
             x_pose = transformed_global_plan_.at(i);
 
@@ -493,18 +488,6 @@ namespace ftc_local_planner
     {
         std::vector<geometry_msgs::PoseStamped> path;
         path = transformed_global_plan_;
-        //Get all points of the global plan which are used and transform them
-        /*for(int i = 0; i <= max_point; i++)
-        {
-            tf::Stamped<tf::Pose> x_pose;
-            ftc_local_planner::getXPose(*tf_,global_plan_, costmap_ros_->getGlobalFrameID(),x_pose,i);
-            tf::Stamped<tf::Pose> p = tf::Stamped<tf::Pose>(x_pose,
-                                      ros::Time::now(),
-                                      costmap_ros_->getGlobalFrameID());
-            geometry_msgs::PoseStamped pose;
-            tf::poseStampedTFToMsg(p, pose);
-            path.push_back(pose);
-        }*/
 
         //given an empty path we won't do anything
         if(path.empty())
