@@ -30,11 +30,14 @@ namespace ftc_local_planner
     {
     }
 
-    void FTCPlanner::initialize(std::string name, tf::TransformListener* tf, costmap_2d::Costmap2DROS* costmap_ros)
+    void FTCPlanner::initialize(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros)
     {
         ros::NodeHandle private_nh("~/" + name);
         local_plan_publisher_ = private_nh.advertise<nav_msgs::Path>("local_plan", 1);
         costmap_ros_ = costmap_ros;
+
+        //tf2_ros::TransformListener tf_temp(*tf);
+        //tf_ = &tf_temp;
         tf_ = tf;
         first_setPlan_ = true;
         rotate_to_global_plan_ = false;
@@ -110,7 +113,9 @@ namespace ftc_local_planner
         ros::Time begin = ros::Time::now();
 
         tf::Stamped<tf::Pose> current_pose;
-        costmap_ros_->getRobotPose(current_pose);
+        geometry_msgs::PoseStamped msg;
+        costmap_ros_->getRobotPose(msg);
+        tf::poseStampedMsgToTF(msg, current_pose);
 
         //Join the actual global an local costmap in the global costmap.
         if(config_.join_obstacle){
