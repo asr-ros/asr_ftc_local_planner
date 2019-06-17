@@ -236,7 +236,7 @@ namespace ftc_local_planner
         for(int i = 0; i <= point; i++)
         {
             geometry_msgs::PoseStamped x_pose;
-            x_pose=transformed_global_plan_.at(point);
+            x_pose=transformed_global_plan_.at(i);
 
             //Calculate the angles between robotpose and global plan point pose
             double angle_to_goal = atan2(x_pose.pose.position.y - current_pose.getOrigin().getY(),
