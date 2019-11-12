@@ -110,7 +110,12 @@ namespace ftc_local_planner
         ros::Time begin = ros::Time::now();
 
         tf::Stamped<tf::Pose> current_pose;
-        costmap_ros_->getRobotPose(current_pose);
+        geometry_msgs::PoseStamped msg;
+        costmap_ros_->getRobotPose(msg);
+
+        current_pose.setData(tf::Transform(tf::Quaternion(msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w),
+                         tf::Vector3(msg.pose.position.x, msg.pose.position.y, msg.pose.position.z)));
+
 
         //Join the actual global an local costmap in the global costmap.
         if(config_.join_obstacle){
