@@ -25,7 +25,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/Point.h>
-#include <tf/transform_listener.h>
 
 #include <string>
 #include <cmath>
@@ -36,13 +35,13 @@ namespace ftc_local_planner
 {
     /**
     * @brief  Returns X pose in plan
-    * @param tf A reference to a transform listener
+    * @param tf A reference to a transform buffer
     * @param global_plan The plan being followed
     * @param global_frame The global frame of the local planner
     * @param goal_pose the pose to copy into
     * @return True if achieved, false otherwise
     */
-    bool getXPose(const tf::TransformListener& tf,
+    bool getXPose(const tf2_ros::Buffer& tf,
                   const std::vector<geometry_msgs::PoseStamped>& global_plan,
                   const std::string& global_frame,
                   tf::Stamped<tf::Pose> &goal_pose, int plan_point);

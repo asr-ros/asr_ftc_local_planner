@@ -19,7 +19,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 namespace ftc_local_planner
 {
-    bool getXPose(const tf::TransformListener& tf,
+    bool getXPose(const tf2_ros::Buffer& tf,
                   const std::vector<geometry_msgs::PoseStamped>& global_plan,
                   const std::string& global_frame, tf::Stamped<tf::Pose>& goal_pose, int plan_point)
     {
@@ -37,19 +37,20 @@ namespace ftc_local_planner
         const geometry_msgs::PoseStamped& plan_goal_pose = global_plan.at(plan_point);
         try
         {
-            tf::StampedTransform transform;
-            tf.waitForTransform(global_frame, ros::Time::now(),
-                                plan_goal_pose.header.frame_id, plan_goal_pose.header.stamp,
-                                plan_goal_pose.header.frame_id, ros::Duration(0.5));
-            tf.lookupTransform(global_frame, ros::Time(),
-                               plan_goal_pose.header.frame_id, plan_goal_pose.header.stamp,
-                               plan_goal_pose.header.frame_id, transform);
+            tf.canTransform(global_frame, ros::Time::now(),
+                            plan_goal_pose.header.frame_id, plan_goal_pose.header.stamp,
+                            plan_goal_pose.header.frame_id, ros::Duration(0.5));  
 
-            poseStampedMsgToTF(plan_goal_pose, goal_pose);
+            geometry_msgs::TransformStamped tmp = tf.lookupTransform(global_frame, ros::Time(),
+                                                                    plan_goal_pose.header.frame_id, plan_goal_pose.header.stamp,
+                                                                    plan_goal_pose.header.frame_id, ros::Duration(0.5));
+            tf::StampedTransform transform;
+            transformStampedMsgToTF(tmp, transform);
+
+            poseStampedMsgToTF(plan_goal_pose, goal_pose);    
             goal_pose.setData(transform * goal_pose);
             goal_pose.stamp_ = transform.stamp_;
             goal_pose.frame_id_ = global_frame;
-
         }
         catch(tf::LookupException& ex)
         {

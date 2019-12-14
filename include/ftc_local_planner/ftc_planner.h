@@ -22,7 +22,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 #include <costmap_2d/costmap_2d_ros.h>
 
-#include <tf/transform_listener.h>
+#include <tf2_ros/buffer.h>
 
 #include <Eigen/Core>
 
@@ -67,10 +67,10 @@ namespace ftc_local_planner
         /**
          * @brief Constructs the local planner
          * @param name The name to give this instance of the local planner
-         * @param tf A pointer to a transform listener
+         * @param tf A pointer to a transform buffer
          * @param costmap_ros The cost map to use for assigning costs to local plans
          */
-        void initialize(std::string name, tf::TransformListener* tf, costmap_2d::Costmap2DROS* costmap_ros);
+        void initialize(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros);
 
         ~FTCPlanner();
 
@@ -135,7 +135,7 @@ namespace ftc_local_planner
         bool checkCollision(int max_points);
 
         //used for transformation
-        tf::TransformListener* tf_;
+        tf2_ros::Buffer* tf_;
         //costmap to get the current position
         costmap_2d::Costmap2DROS* costmap_ros_;
         //global plan which we run along
